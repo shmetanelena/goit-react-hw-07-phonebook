@@ -1,28 +1,42 @@
 import styles from './ContactList.module.css';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  delContact,
+  contactsSelector,
+  filterSelector,
+} from '../../redux/contactsSlice';
+import { useMemo } from 'react';
 
-export const ContactList = ({ contacts, onDeleteContact }) => (
-  <ul className={styles.contactList}>
-    {contacts.map(({ id, name, number }) => (
-      <li key={id} className={styles.contactList_item}>
-        <p>
-          {name}: {number}
-        </p>
-        <button className={styles.button} onClick={() => onDeleteContact(id)}>
-          Delete
-        </button>
-      </li>
-    ))}
-  </ul>
-);
+export const ContactList = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(contactsSelector);
+  const filter = useSelector(filterSelector);
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ),
-  onDeleteContact: PropTypes.func.isRequired,
+  const visibleContacts = useMemo(() => {
+    if (filter.length === 0) {
+      return contacts;
+    }
+    const normalizedFilter = filter.toLowerCase();
+    return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(normalizedFilter)
+    );
+  }, [filter, contacts]);
+
+  return (
+    <ul className={styles.contactList}>
+      {visibleContacts.map(({ id, name, number }) => (
+        <li key={id} className={styles.contactList_item}>
+          <p>
+            {name}: {number}
+          </p>
+          <button
+            className={styles.button}
+            onClick={() => dispatch(delContact(id))}
+          >
+            Delete
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
 };

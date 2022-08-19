@@ -2,6 +2,7 @@ import { ContactForm } from './ContactForm';
 import { ContactList } from './ContactList';
 import { Filter } from './Filter';
 import styles from './App.module.css';
+import { Toaster } from 'react-hot-toast';
 
 export const App = () => (
   <div className={styles.section}>
@@ -20,5 +21,6 @@ export const App = () => (
         <ContactList />
       </div>
     </div>
+    <Toaster />
   </div>
 );

@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import styles from './ContactForm.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { addContact, contactsSelector } from '../../redux/contactsSlice';
+import {
+  useCreateContactMutation,
+  useFetchContactsQuery,
+} from 'redux/contacts';
+import toast from 'react-hot-toast';
 
 export const ContactForm = () => {
-  const dispatch = useDispatch();
-  const contacts = useSelector(contactsSelector);
+  const [createContact] = useCreateContactMutation();
+  const { data: contacts } = useFetchContactsQuery();
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const nameInputId = useRef();
@@ -17,18 +20,23 @@ export const ContactForm = () => {
     numberInputId.current = nanoid();
   }, []);
 
-  const handelSubmit = e => {
+  const handelSubmit = async e => {
     e.preventDefault();
     const normalizedName = name.toLowerCase();
     if (
-      contacts.find(contact => contact.name.toLowerCase() === normalizedName)
+      contacts?.find(contact => contact.name.toLowerCase() === normalizedName)
     ) {
       alert(`${name} is already in contacts.`);
       return;
     }
-    dispatch(addContact({ name, number }));
-    setName('');
-    setNumber('');
+    try {
+      await createContact({ name, number });
+      setName('');
+      setNumber('');
+      toast.success('Contact created');
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

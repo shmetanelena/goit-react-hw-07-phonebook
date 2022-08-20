@@ -22,7 +22,6 @@ export const ContactList = () => {
   }, [filter, contacts]);
 
   return (
-    // {isFetching && <Spinner />}
     <ul className={styles.contactList}>
       {visibleContacts &&
         visibleContacts.map(contact => (

@@ -4,6 +4,9 @@ body {
   overflow: auto;
   margin: 0px;
   padding: 0;
+  height: 100%;
+  /* width: 100%; */
+  background-color: #9b8f99;
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

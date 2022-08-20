@@ -14,6 +14,7 @@ export const ContactForm = () => {
   const [number, setNumber] = useState('');
   const nameInputId = useRef();
   const numberInputId = useRef();
+  console.log('ContactsFrom::contacts:', contacts);
 
   useEffect(() => {
     nameInputId.current = nanoid();

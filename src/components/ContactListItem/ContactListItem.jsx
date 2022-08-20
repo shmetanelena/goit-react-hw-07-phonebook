@@ -1,4 +1,4 @@
-import styles from './ContactList.module.css';
+import styles from './ContactListItem.module.css';
 import { useDeleteContactMutation } from 'redux/contacts';
 import toast from 'react-hot-toast';
 

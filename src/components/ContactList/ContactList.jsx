@@ -2,10 +2,10 @@ import styles from './ContactList.module.css';
 import { useSelector } from 'react-redux';
 import { useMemo } from 'react';
 import { filterSelector, useFetchContactsQuery } from 'redux/contacts';
-import { ContactListItem } from './ContactListItem';
+import { ContactListItem } from '../ContactListItem/ContactListItem';
 
 export const ContactList = () => {
-  const { data: contacts, isFetching } = useFetchContactsQuery();
+  const { data: contacts } = useFetchContactsQuery();
   const filter = useSelector(filterSelector);
 
   const visibleContacts = useMemo(() => {

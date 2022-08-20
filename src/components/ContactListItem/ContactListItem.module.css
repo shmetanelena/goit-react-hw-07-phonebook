@@ -7,7 +7,7 @@
 
 .button {
   background: rgba(138, 105, 105, 0.2);
-  box-shadow: 10px 5px 10px 5px rgba(20, 1, 1, 0.89);
+  /* box-shadow: 10px 5px 10px 5px rgba(20, 1, 1, 0.89); */
 
   color: rgb(249, 224, 248);
   padding: 0.25em;
@@ -18,7 +18,7 @@
   font-weight: 700;
   line-height: 2;
   margin: 5px 0 1em;
-  max-width: 160px;
+  max-width: 70px;
   text-decoration: none;
   text-transform: uppercase;
   width: 100%;
